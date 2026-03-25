@@ -26,29 +26,12 @@ const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
     {
-      badge: "Специальное предложение",
-      title: "Наставничество вместо Франшизы",
-      desc: "Запустите своё высокочековое наставничество за 14 дней с чистой прибылью от 2,5 млн рублей. Масштабирование через экспертность.",
-      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800",
-      cta: "Узнать подробнее",
-      secondaryCta: "Презентация",
-      path: "/business-offer",
-      features: [
-        "Высокий Чек (от 250к)",
-        "Нет Операционки",
-        "Запуск за 14 дней",
-        "Личный Бренд",
-        "Чистая прибыль от 2,5 млн",
-        "Элитное комьюнити"
-      ]
-    },
-    {
       badge: "Global Scaling Expert",
       title: "iMperius: Масштабирование бизнеса через франчайзинг",
       desc: "12 лет опыта упаковки и масштабирования. Работа напрямую с основателем и командой узких специалистов без лишних посредников.",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
+      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
       cta: "Получить аудит",
-      secondaryCta: "Наши кейсы",
+      secondaryCta: "О компании",
       path: "/#Контакты"
     }
   ];
@@ -79,7 +62,7 @@ const Hero = () => {
               <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
               <span className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-white/60">{slides[currentSlide].badge}</span>
             </div>
-            <h1 className="text-3xl sm:text-5xl md:text-7xl font-display font-bold leading-[1.1] mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] mb-6 break-words">
               {slides[currentSlide].title.split(':').length > 1 ? (
                 <>
                   {slides[currentSlide].title.split(':')[0]}: <span className="gold-text-gradient">{slides[currentSlide].title.split(':')[1]}</span>
@@ -88,20 +71,9 @@ const Hero = () => {
                 <span className="gold-text-gradient">{slides[currentSlide].title}</span>
               )}
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-white/60 mb-10 max-w-lg leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-white/60 mb-10 max-w-xl leading-relaxed">
               {slides[currentSlide].desc}
             </p>
-
-            {slides[currentSlide].features && (
-              <div className="grid grid-cols-2 gap-3 mb-10">
-                {slides[currentSlide].features.map((feat, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm text-white/80">
-                    <CheckCircle2 className="w-4 h-4 text-gold" />
-                    {feat}
-                  </div>
-                ))}
-              </div>
-            )}
 
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
@@ -271,16 +243,17 @@ const About = () => {
 const Pricing = () => {
   const packages = [
     {
-      title: "Наставничество",
-      price: "250 000 ₽",
-      desc: "Перепаковка вашего бизнеса в элитный продукт с высоким чеком.",
+      title: "Готовый бизнес (идея, инструкция)",
+      price: "150 000 ₽",
+      desc: "Полный комплект для запуска вашего бизнеса с нуля.",
       features: [
-        "Упаковка наставничества за 14 дней",
-        "Стратегия продаж на высокий чек",
-        "Автоматизация воронки",
-        "Личный бренд эксперта",
-        "Сопровождение до результата",
-        "Юридическая защита методики"
+        "Разработка концепции",
+        "Фин. Модель",
+        "Презентация",
+        "Пошаговая инструкция",
+        "Договор",
+        "Сопровождение продаж",
+        "Доп: Сайт, Соц. сети, Директ, Метрика"
       ],
       accent: true
     },
@@ -340,7 +313,11 @@ const Pricing = () => {
               </ul>
 
               <Link 
-                to="/business-offer"
+                to="/#Контакты"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('Контакты')?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className={`w-full py-4 rounded-xl font-bold transition-all text-center block ${pkg.accent ? "bg-gold text-black hover:bg-gold-neon" : "bg-white/10 text-white hover:bg-white/20"}`}
               >
                 Выбрать тариф
@@ -460,94 +437,6 @@ const Advantages = () => {
               </div>
             </div>
           </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Trust = () => {
-  const cases = [
-    {
-      title: "Сеть кофеен «Coffee Soul»",
-      desc: "Разработка полного брендбука, стратегии масштабирования и запуск 12 новых точек за 6 месяцев. Создание единой системы контроля качества.",
-      image: "https://images.unsplash.com/photo-1559034489-47397195194f?auto=format&fit=crop&q=80&w=800",
-      tags: ["Брендбук", "Стратегия", "Масштабирование"]
-    },
-    {
-      title: "Фитнес-центры «Urban Fit»",
-      desc: "Автоматизация бизнес-процессов, создание корпоративного портала для франчайзи и упаковка франшизы «под ключ». Рост сети на 240%.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-      tags: ["Сайт", "Автоматизация", "Франшиза"]
-    }
-  ];
-
-  return (
-    <section id="Кейсы" className="py-24 bg-zinc-950 relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
-      
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-16">
-          <h2 className="text-4xl font-display font-bold mb-4">Наши кейсы</h2>
-          <p className="text-white/40 max-w-xl">Реальные примеры того, как мы помогаем бизнесу расти и захватывать новые рынки через системный подход.</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-12">
-          {cases.map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.2 }}
-              className="group"
-            >
-              {/* Image Container - Mockup Style */}
-              <div className="relative aspect-[16/10] rounded-3xl overflow-hidden border border-white/10 bg-zinc-900 mb-8 shadow-2xl group-hover:border-gold/30 transition-colors">
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                
-                {/* Floating Tags */}
-                <div className="absolute top-4 left-4 flex gap-2">
-                  {item.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className="px-3 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] uppercase tracking-widest text-white/60">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Description below image */}
-              <div className="space-y-4">
-                <h4 className="text-2xl font-display font-bold text-white group-hover:text-gold transition-colors">{item.title}</h4>
-                <p className="text-white/50 leading-relaxed">{item.desc}</p>
-                <button className="flex items-center gap-2 text-gold text-sm font-bold hover:gap-4 transition-all">
-                  Подробнее о кейсе <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Stats Summary */}
-        <div className="mt-24 pt-16 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { label: "Успешных кейсов", val: "150+" },
-            { label: "Средний ROI", val: "45%" },
-            { label: "Стран присутствия", val: "12" },
-            { label: "Лет опыта", val: "12" },
-          ].map((stat, idx) => (
-            <div key={idx} className="text-center md:text-left">
-              <div className="text-3xl font-display font-bold text-gold mb-1">{stat.val}</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-semibold">{stat.label}</div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -815,7 +704,6 @@ const Home = () => {
         <Pricing />
         <Process />
         <Advantages />
-        <Trust />
         <Quiz onFinish={setQuizAnswers} />
         <Contact quizAnswers={quizAnswers} />
       </main>

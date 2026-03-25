@@ -16,7 +16,6 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Главная", path: "/" },
-    { name: "Готовый бизнес", path: "/business-offer" },
     { name: "Digital Услуги", path: "/digital" },
   ];
 
@@ -25,7 +24,6 @@ const Navbar = () => {
     { name: "Тарифы", path: "/#Тарифы" },
     { name: "Процесс", path: "/#Процесс" },
     { name: "Преимущества", path: "/#Преимущества" },
-    { name: "Кейсы", path: "/#Кейсы" },
   ];
 
   const displayItems = location.pathname === "/" ? [...navItems, ...homeItems.slice(1)] : navItems;

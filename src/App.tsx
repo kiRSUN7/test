@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { useEffect } from "react";
 import Home from "./pages/Home";
 import DigitalServices from "./pages/DigitalServices";
-import BusinessOffer from "./pages/BusinessOffer";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -38,7 +37,6 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/digital" element={<DigitalServices />} />
-          <Route path="/business-offer" element={<BusinessOffer />} />
         </Routes>
         <Footer />
       </div>
