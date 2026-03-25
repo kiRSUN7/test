@@ -19,8 +19,47 @@ import {
   Check
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState, FormEvent } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+    {
+      badge: "Специальное предложение",
+      title: "Наставничество вместо Франшизы",
+      desc: "Запустите своё высокочековое наставничество за 14 дней с чистой прибылью от 2,5 млн рублей. Масштабирование через экспертность.",
+      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800",
+      cta: "Узнать подробнее",
+      secondaryCta: "Презентация",
+      path: "/business-offer",
+      features: [
+        "Высокий Чек (от 250к)",
+        "Нет Операционки",
+        "Запуск за 14 дней",
+        "Личный Бренд",
+        "Чистая прибыль от 2,5 млн",
+        "Элитное комьюнити"
+      ]
+    },
+    {
+      badge: "Global Scaling Expert",
+      title: "iMperius: Масштабирование бизнеса через франчайзинг",
+      desc: "12 лет опыта упаковки и масштабирования. Работа напрямую с основателем и командой узких специалистов без лишних посредников.",
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
+      cta: "Получить аудит",
+      secondaryCta: "Наши кейсы",
+      path: "/#Контакты"
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 8000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center pt-32 pb-16 lg:pt-20 lg:pb-0 overflow-hidden">
       {/* Background Elements */}
@@ -28,101 +67,142 @@ const Hero = () => {
       <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-gold/5 rounded-full blur-[120px]" />
       <div className="absolute inset-0 circuit-pattern opacity-20" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6">
-            <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-            <span className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-white/60">Global Scaling Expert</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-display font-bold leading-[1.1] mb-6">
-            iMperius: <span className="gold-text-gradient">Масштабирование</span> бизнеса через франчайзинг
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-white/60 mb-10 max-w-lg leading-relaxed">
-            12 лет опыта упаковки и масштабирования. Работа напрямую с основателем и командой узких специалистов без лишних посредников.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button className="px-8 py-4 bg-gold text-black font-bold rounded-full flex items-center justify-center gap-2 hover:scale-105 transition-transform group">
-              Получить аудит
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-8 py-4 border border-white/20 text-white font-bold rounded-full hover:bg-white/5 transition-colors">
-              Наши кейсы
-            </button>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="relative hidden lg:block"
-        >
-          <div className="relative z-10">
-            {/* Expert Image Container */}
-            <div className="relative aspect-[4/5] w-full max-w-[450px] ml-auto rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl group">
-              <img 
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800" 
-                alt="Business Scaling Expert" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-              
-              {/* Floating Badges */}
-              <motion.div 
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 }}
-                className="absolute top-10 -left-6 p-4 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-20"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center border border-gold/30">
-                    <Award className="w-5 h-5 text-gold" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] uppercase tracking-widest text-white/40 font-semibold">Expert Status</div>
-                    <div className="text-sm font-bold text-white">Verified Partner</div>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-                className="absolute bottom-10 right-6 p-5 bg-gold backdrop-blur-xl rounded-2xl shadow-2xl z-20"
-              >
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-black" />
-                  <div>
-                    <div className="text-[10px] uppercase tracking-widest text-black/60 font-bold">Success Rate</div>
-                    <div className="text-lg font-display font-black text-black">98% ROI</div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Bottom Info Overlay */}
-              <div className="absolute bottom-0 left-0 w-full p-8 pt-20 bg-gradient-to-t from-black to-transparent">
-                <div className="flex items-center gap-2 mb-2">
-                  <Shield className="w-4 h-4 text-gold" />
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-gold font-bold">Founder & Lead Strategist</span>
-                </div>
-                <div className="text-2xl font-display font-bold text-white">Direct Expert Access</div>
-              </div>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div
+            key={`content-${currentSlide}`}
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6">
+              <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+              <span className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-white/60">{slides[currentSlide].badge}</span>
             </div>
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-display font-bold leading-[1.1] mb-6">
+              {slides[currentSlide].title.split(':').length > 1 ? (
+                <>
+                  {slides[currentSlide].title.split(':')[0]}: <span className="gold-text-gradient">{slides[currentSlide].title.split(':')[1]}</span>
+                </>
+              ) : (
+                <span className="gold-text-gradient">{slides[currentSlide].title}</span>
+              )}
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl text-white/60 mb-10 max-w-lg leading-relaxed">
+              {slides[currentSlide].desc}
+            </p>
 
-            {/* Decorative background elements */}
-            <div className="absolute -top-10 -right-10 w-64 h-64 bg-gold/10 rounded-full blur-[100px] -z-10" />
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 border-b-2 border-l-2 border-gold/20 rounded-bl-[3rem] -z-10" />
-            <div className="absolute top-20 -right-4 w-20 h-20 border-t-2 border-r-2 border-gold/20 rounded-tr-[2rem] -z-10" />
-          </div>
-        </motion.div>
+            {slides[currentSlide].features && (
+              <div className="grid grid-cols-2 gap-3 mb-10">
+                {slides[currentSlide].features.map((feat, i) => (
+                  <div key={i} className="flex items-center gap-2 text-sm text-white/80">
+                    <CheckCircle2 className="w-4 h-4 text-gold" />
+                    {feat}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button 
+                onClick={() => {
+                  if (slides[currentSlide].path.startsWith('/#')) {
+                    const id = slides[currentSlide].path.substring(2);
+                    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    navigate(slides[currentSlide].path);
+                  }
+                }}
+                className="px-8 py-4 bg-gold text-black font-bold rounded-full flex items-center justify-center gap-2 hover:scale-105 transition-transform group"
+              >
+                {slides[currentSlide].cta}
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+              <button className="px-8 py-4 border border-white/20 text-white font-bold rounded-full hover:bg-white/5 transition-colors">
+                {slides[currentSlide].secondaryCta}
+              </button>
+            </div>
+          </motion.div>
+
+          <motion.div
+            key={`image-${currentSlide}`}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="relative block mt-12 lg:mt-0"
+          >
+            <div className="relative z-10">
+              {/* Expert Image Container */}
+              <div className="relative aspect-[4/5] w-full max-w-[450px] mx-auto lg:ml-auto rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl group">
+                <img 
+                  src={slides[currentSlide].image} 
+                  alt={slides[currentSlide].title} 
+                  className="w-full h-full object-cover transition-all duration-700 scale-110 group-hover:scale-100"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                
+                {/* Floating Badges */}
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="absolute top-10 -left-6 p-4 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-20"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center border border-gold/30">
+                      <Award className="w-5 h-5 text-gold" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase tracking-widest text-white/40 font-semibold">Expert Status</div>
+                      <div className="text-sm font-bold text-white">Verified Partner</div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                  className="absolute bottom-10 right-6 p-5 bg-gold backdrop-blur-xl rounded-2xl shadow-2xl z-20"
+                >
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="w-6 h-6 text-black" />
+                    <div>
+                      <div className="text-[10px] uppercase tracking-widest text-black/60 font-bold">Success Rate</div>
+                      <div className="text-lg font-display font-black text-black">98% ROI</div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Bottom Info Overlay */}
+                <div className="absolute bottom-0 left-0 w-full p-8 pt-20 bg-gradient-to-t from-black to-transparent">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Shield className="w-4 h-4 text-gold" />
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-gold font-bold">Founder & Lead Strategist</span>
+                  </div>
+                  <div className="text-2xl font-display font-bold text-white">Direct Expert Access</div>
+                </div>
+              </div>
+
+              {/* Decorative background elements */}
+              <div className="absolute -top-10 -right-10 w-64 h-64 bg-gold/10 rounded-full blur-[100px] -z-10" />
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 border-b-2 border-l-2 border-gold/20 rounded-bl-[3rem] -z-10" />
+              <div className="absolute top-20 -right-4 w-20 h-20 border-t-2 border-r-2 border-gold/20 rounded-tr-[2rem] -z-10" />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Slider Controls */}
+        <div className="flex justify-center gap-3 mt-12">
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentSlide(idx)}
+              className={`w-12 h-1 rounded-full transition-all ${currentSlide === idx ? "bg-gold" : "bg-white/20"}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -191,18 +271,25 @@ const About = () => {
 const Pricing = () => {
   const packages = [
     {
-      title: "Быстрый старт",
-      price: "89 000 ₽",
-      desc: "Идеален для оформления готовой сделки.",
-      features: ["Юридический аудит", "Договор франчайзинга", "Консультация эксперта", "Базовая финмодель"],
-      accent: false
+      title: "Наставничество",
+      price: "250 000 ₽",
+      desc: "Перепаковка вашего бизнеса в элитный продукт с высоким чеком.",
+      features: [
+        "Упаковка наставничества за 14 дней",
+        "Стратегия продаж на высокий чек",
+        "Автоматизация воронки",
+        "Личный бренд эксперта",
+        "Сопровождение до результата",
+        "Юридическая защита методики"
+      ],
+      accent: true
     },
     {
       title: "Оптимальный",
       price: "109 000 ₽",
       desc: "Полная разработка без лишних трат.",
       features: ["Полная упаковка", "Маркетинговая стратегия", "Детальная финмодель", "Презентация для инвесторов", "Обучающие материалы"],
-      accent: true
+      accent: false
     },
     {
       title: "VIP-упаковка",
@@ -252,9 +339,12 @@ const Pricing = () => {
                 ))}
               </ul>
 
-              <button className={`w-full py-4 rounded-xl font-bold transition-all ${pkg.accent ? "bg-gold text-black hover:bg-gold-neon" : "bg-white/10 text-white hover:bg-white/20"}`}>
+              <Link 
+                to="/business-offer"
+                className={`w-full py-4 rounded-xl font-bold transition-all text-center block ${pkg.accent ? "bg-gold text-black hover:bg-gold-neon" : "bg-white/10 text-white hover:bg-white/20"}`}
+              >
                 Выбрать тариф
-              </button>
+              </Link>
             </motion.div>
           ))}
         </div>
@@ -613,6 +703,15 @@ const Contact = ({ quizAnswers }: { quizAnswers: string[] }) => {
             </p>
             
             <div className="space-y-8">
+              <div className="flex items-start gap-6 group">
+                <div className="w-12 h-12 rounded-2xl bg-gold/10 flex items-center justify-center shrink-0 group-hover:bg-gold group-hover:text-black transition-all duration-300">
+                  <Zap className="w-6 h-6 text-gold group-hover:text-black" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-lg mb-1">Связаться напрямую</h4>
+                  <a href="tel:+79667003303" className="text-white/40 text-sm hover:text-gold transition-colors">+7 (966) 700-33-03</a>
+                </div>
+              </div>
               <div className="flex items-start gap-6">
                 <div className="w-12 h-12 rounded-2xl bg-gold/10 flex items-center justify-center shrink-0">
                   <Globe className="w-6 h-6 text-gold" />

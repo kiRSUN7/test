@@ -16,6 +16,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Главная", path: "/" },
+    { name: "Готовый бизнес", path: "/business-offer" },
     { name: "Digital Услуги", path: "/digital" },
   ];
 
@@ -52,9 +53,14 @@ const Navbar = () => {
               </Link>
             )
           ))}
-          <button className="px-5 py-2 border border-gold/50 text-gold text-sm font-semibold rounded-full hover:bg-gold hover:text-black transition-all">
-            Связаться
-          </button>
+          <div className="flex items-center gap-4">
+            <a href="tel:+79667003303" className="text-sm font-bold text-white hover:text-gold transition-colors">
+              +7 (966) 700-33-03
+            </a>
+            <button className="px-5 py-2 border border-gold/50 text-gold text-sm font-semibold rounded-full hover:bg-gold hover:text-black transition-all">
+              Связаться
+            </button>
+          </div>
         </div>
 
         {/* Mobile Toggle */}
