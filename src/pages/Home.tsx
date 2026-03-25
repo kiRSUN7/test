@@ -8,13 +8,21 @@ import {
   Users, 
   FileText, 
   ChevronRight,
-  ArrowRight
+  ArrowRight,
+  Activity,
+  Globe,
+  BarChart3,
+  Award,
+  CheckCircle2,
+  Shield,
+  Send,
+  Check
 } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, FormEvent } from "react";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-32 pb-16 lg:pt-20 lg:pb-0 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-1/4 -right-20 w-96 h-96 bg-gold/10 rounded-full blur-[120px]" />
       <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-gold/5 rounded-full blur-[120px]" />
@@ -29,12 +37,12 @@ const Hero = () => {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6">
             <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-white/60">Global Scaling Expert</span>
+            <span className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-white/60">Global Scaling Expert</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-display font-bold leading-[1.1] mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-display font-bold leading-[1.1] mb-6">
             iMperius: <span className="gold-text-gradient">Масштабирование</span> бизнеса через франчайзинг
           </h1>
-          <p className="text-lg md:text-xl text-white/60 mb-10 max-w-lg leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-white/60 mb-10 max-w-lg leading-relaxed">
             12 лет опыта упаковки и масштабирования. Работа напрямую с основателем и командой узких специалистов без лишних посредников.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
@@ -55,41 +63,65 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.2 }}
           className="relative hidden lg:block"
         >
-          <div className="relative z-10 bg-gradient-to-br from-white/10 to-transparent p-1 rounded-2xl border border-white/10 backdrop-blur-sm">
-             <div className="bg-black/40 rounded-xl p-8 aspect-square flex flex-col justify-between border border-white/5">
-                <div className="flex justify-between items-start">
-                  <Cpu className="w-12 h-12 text-gold opacity-50" />
-                  <div className="text-right">
-                    <div className="text-xs text-white/40 uppercase tracking-widest mb-1">Efficiency</div>
-                    <div className="text-2xl font-bold text-gold">98.4%</div>
+          <div className="relative z-10">
+            {/* Expert Image Container */}
+            <div className="relative aspect-[4/5] w-full max-w-[450px] ml-auto rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl group">
+              <img 
+                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800" 
+                alt="Business Scaling Expert" 
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+              
+              {/* Floating Badges */}
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5 }}
+                className="absolute top-10 -left-6 p-4 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-20"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center border border-gold/30">
+                    <Award className="w-5 h-5 text-gold" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest text-white/40 font-semibold">Expert Status</div>
+                    <div className="text-sm font-bold text-white">Verified Partner</div>
                   </div>
                 </div>
-                
-                <div className="space-y-4">
-                  <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                    <motion.div 
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "75%" }}
-                      transition={{ duration: 2, delay: 0.5 }}
-                      className="h-full bg-gold" 
-                    />
-                  </div>
-                  <div className="flex justify-between text-[10px] uppercase tracking-tighter text-white/30 font-mono">
-                    <span>Scaling Vector</span>
-                    <span>Market Expansion</span>
-                  </div>
-                </div>
+              </motion.div>
 
-                <div className="grid grid-cols-3 gap-4">
-                  {[1, 2, 3].map(i => (
-                    <div key={i} className="h-20 bg-white/5 rounded-lg border border-white/5" />
-                  ))}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+                className="absolute bottom-10 right-6 p-5 bg-gold backdrop-blur-xl rounded-2xl shadow-2xl z-20"
+              >
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-6 h-6 text-black" />
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest text-black/60 font-bold">Success Rate</div>
+                    <div className="text-lg font-display font-black text-black">98% ROI</div>
+                  </div>
                 </div>
-             </div>
+              </motion.div>
+
+              {/* Bottom Info Overlay */}
+              <div className="absolute bottom-0 left-0 w-full p-8 pt-20 bg-gradient-to-t from-black to-transparent">
+                <div className="flex items-center gap-2 mb-2">
+                  <Shield className="w-4 h-4 text-gold" />
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-gold font-bold">Founder & Lead Strategist</span>
+                </div>
+                <div className="text-2xl font-display font-bold text-white">Direct Expert Access</div>
+              </div>
+            </div>
+
+            {/* Decorative background elements */}
+            <div className="absolute -top-10 -right-10 w-64 h-64 bg-gold/10 rounded-full blur-[100px] -z-10" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 border-b-2 border-l-2 border-gold/20 rounded-bl-[3rem] -z-10" />
+            <div className="absolute top-20 -right-4 w-20 h-20 border-t-2 border-r-2 border-gold/20 rounded-tr-[2rem] -z-10" />
           </div>
-          {/* Decorative lines */}
-          <div className="absolute -top-10 -right-10 w-40 h-40 border-t-2 border-r-2 border-gold/20 rounded-tr-3xl" />
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 border-b-2 border-l-2 border-gold/20 rounded-bl-3xl" />
         </motion.div>
       </div>
     </section>
@@ -310,21 +342,31 @@ const Advantages = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-gold/5 border border-gold/20 rounded-3xl p-12 relative overflow-hidden"
+            className="relative aspect-[4/5] lg:aspect-auto lg:h-full min-h-[500px] rounded-[2.5rem] overflow-hidden border border-white/10 group"
           >
-            <div className="absolute top-0 right-0 p-4">
-              <TrendingUp className="w-24 h-24 text-gold opacity-10" />
-            </div>
-            <div className="relative z-10">
+            <img 
+              src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800" 
+              alt="Expert Focus" 
+              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+            
+            <div className="absolute inset-0 p-12 flex flex-col justify-end relative z-10">
+              <div className="absolute top-0 right-0 p-8">
+                <TrendingUp className="w-20 h-20 text-gold opacity-20" />
+              </div>
+              
               <div className="text-6xl font-display font-bold text-gold mb-4">100%</div>
-              <h3 className="text-2xl font-bold mb-4">Фокус на масштабировании</h3>
-              <p className="text-white/60 leading-relaxed">
+              <h3 className="text-3xl font-bold mb-4 text-white">Фокус на масштабировании</h3>
+              <p className="text-white/70 leading-relaxed max-w-md">
                 Мы не просто «упаковываем» франшизу. Мы создаем систему, которая работает автономно и приносит прибыль владельцу, минимизируя операционные риски.
               </p>
+              
               <div className="mt-8 flex gap-4">
                 <div className="w-12 h-1 bg-gold rounded-full" />
-                <div className="w-12 h-1 bg-white/10 rounded-full" />
-                <div className="w-12 h-1 bg-white/10 rounded-full" />
+                <div className="w-12 h-1 bg-white/20 rounded-full" />
+                <div className="w-12 h-1 bg-white/20 rounded-full" />
               </div>
             </div>
           </motion.div>
@@ -335,44 +377,85 @@ const Advantages = () => {
 };
 
 const Trust = () => {
+  const cases = [
+    {
+      title: "Сеть кофеен «Coffee Soul»",
+      desc: "Разработка полного брендбука, стратегии масштабирования и запуск 12 новых точек за 6 месяцев. Создание единой системы контроля качества.",
+      image: "https://images.unsplash.com/photo-1559034489-47397195194f?auto=format&fit=crop&q=80&w=800",
+      tags: ["Брендбук", "Стратегия", "Масштабирование"]
+    },
+    {
+      title: "Фитнес-центры «Urban Fit»",
+      desc: "Автоматизация бизнес-процессов, создание корпоративного портала для франчайзи и упаковка франшизы «под ключ». Рост сети на 240%.",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+      tags: ["Сайт", "Автоматизация", "Франшиза"]
+    }
+  ];
+
   return (
-    <section id="Кейсы" className="py-24 bg-zinc-950">
+    <section id="Кейсы" className="py-24 bg-zinc-950 relative overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
+      
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-12 text-center">
-          {[
-            { label: "Успешных кейсов", val: "150+" },
-            { label: "Средний ROI", val: "45%" },
-            { label: "Стран присутствия", val: "12" },
-          ].map((stat, idx) => (
+        <div className="mb-16">
+          <h2 className="text-4xl font-display font-bold mb-4">Наши кейсы</h2>
+          <p className="text-white/40 max-w-xl">Реальные примеры того, как мы помогаем бизнесу расти и захватывать новые рынки через системный подход.</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12">
+          {cases.map((item, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
+              transition={{ delay: idx * 0.2 }}
+              className="group"
             >
-              <div className="text-5xl font-display font-bold text-gold mb-2">{stat.val}</div>
-              <div className="text-xs uppercase tracking-[0.2em] text-white/40">{stat.label}</div>
+              {/* Image Container - Mockup Style */}
+              <div className="relative aspect-[16/10] rounded-3xl overflow-hidden border border-white/10 bg-zinc-900 mb-8 shadow-2xl group-hover:border-gold/30 transition-colors">
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                {/* Floating Tags */}
+                <div className="absolute top-4 left-4 flex gap-2">
+                  {item.tags.map((tag, tIdx) => (
+                    <span key={tIdx} className="px-3 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] uppercase tracking-widest text-white/60">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Description below image */}
+              <div className="space-y-4">
+                <h4 className="text-2xl font-display font-bold text-white group-hover:text-gold transition-colors">{item.title}</h4>
+                <p className="text-white/50 leading-relaxed">{item.desc}</p>
+                <button className="flex items-center gap-2 text-gold text-sm font-bold hover:gap-4 transition-all">
+                  Подробнее о кейсе <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-24 grid md:grid-cols-2 gap-8">
-          {[1, 2].map(i => (
-            <div key={i} className="group relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-black">
-              <img 
-                src={`https://picsum.photos/seed/case${i}/800/450`} 
-                alt="Case Study" 
-                className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black to-transparent">
-                <h4 className="text-2xl font-bold mb-2">Кейс: Сеть кофеен {i === 1 ? "Global Brew" : "Urban Fit"}</h4>
-                <p className="text-sm text-white/60 mb-4">Масштабирование с 2 до 45 точек за 18 месяцев.</p>
-                <button className="flex items-center gap-2 text-gold text-sm font-bold group-hover:gap-4 transition-all">
-                  Смотреть детали <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
+        {/* Stats Summary */}
+        <div className="mt-24 pt-16 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { label: "Успешных кейсов", val: "150+" },
+            { label: "Средний ROI", val: "45%" },
+            { label: "Стран присутствия", val: "12" },
+            { label: "Лет опыта", val: "12" },
+          ].map((stat, idx) => (
+            <div key={idx} className="text-center md:text-left">
+              <div className="text-3xl font-display font-bold text-gold mb-1">{stat.val}</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-semibold">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -381,7 +464,250 @@ const Trust = () => {
   );
 };
 
+const Quiz = ({ onFinish }: { onFinish: (answers: string[]) => void }) => {
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<string[]>([]);
+  const [isFinished, setIsFinished] = useState(false);
+
+  const steps = [
+    {
+      question: "Тип вашего бизнеса",
+      options: ["Услуги", "Ритейл", "Производство", "IT / Online", "Другое"]
+    },
+    {
+      question: "Текущий оборот в месяц",
+      options: ["До 500 000 ₽", "500к – 2 млн ₽", "2 млн – 10 млн ₽", "Более 10 млн ₽"]
+    },
+    {
+      question: "Цель масштабирования",
+      options: ["Запуск франшизы", "Выход на новые регионы", "Автоматизация процессов", "Увеличение прибыли"]
+    }
+  ];
+
+  const handleOptionSelect = (option: string) => {
+    const newAnswers = [...answers, option];
+    setAnswers(newAnswers);
+    if (step < steps.length - 1) {
+      setStep(step + 1);
+    } else {
+      setIsFinished(true);
+      onFinish(newAnswers);
+    }
+  };
+
+  return (
+    <section id="Квиз" className="py-24 bg-black relative">
+      <div className="max-w-3xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-display font-bold mb-4">Рассчитайте потенциал роста</h2>
+          <p className="text-white/40">Ответьте на 3 вопроса и получите предварительный план масштабирования</p>
+        </div>
+
+        <div className="bg-zinc-900/50 border border-white/10 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden">
+          {!isFinished ? (
+            <motion.div
+              key={step}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="space-y-8"
+            >
+              <div className="flex justify-between items-end mb-4">
+                <span className="text-gold font-mono text-sm uppercase tracking-widest">Вопрос {step + 1} из {steps.length}</span>
+                <div className="flex gap-1">
+                  {steps.map((_, i) => (
+                    <div key={i} className={`h-1 w-8 rounded-full transition-colors ${i <= step ? 'bg-gold' : 'bg-white/10'}`} />
+                  ))}
+                </div>
+              </div>
+
+              <h3 className="text-2xl md:text-3xl font-bold">{steps[step].question}</h3>
+
+              <div className="grid gap-4">
+                {steps[step].options.map((option, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleOptionSelect(option)}
+                    className="w-full text-left p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-gold/50 hover:bg-gold/5 transition-all group flex justify-between items-center"
+                  >
+                    <span className="text-lg group-hover:text-white transition-colors">{option}</span>
+                    <ChevronRight className="w-5 h-5 text-white/20 group-hover:text-gold transition-colors" />
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-8"
+            >
+              <div className="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Check className="w-10 h-10 text-gold" />
+              </div>
+              <h3 className="text-3xl font-bold mb-4">Анализ готов!</h3>
+              <p className="text-white/60 mb-8 max-w-md mx-auto">
+                Мы подготовили предварительный расчет для вашего бизнеса. Оставьте контакты ниже, чтобы получить PDF-отчет.
+              </p>
+              <button 
+                onClick={() => document.getElementById('Контакты')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-8 py-4 bg-gold text-black font-bold rounded-full hover:shadow-[0_0_30px_rgba(255,215,0,0.3)] transition-all"
+              >
+                Получить результат
+              </button>
+            </motion.div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Contact = ({ quizAnswers }: { quizAnswers: string[] }) => {
+  const [formState, setFormState] = useState({ name: '', phone: '', comment: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formState,
+          answers: quizAnswers
+        }),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormState({ name: '', phone: '', comment: '' });
+      } else {
+        const data = await response.json();
+        setError(data.error || 'Ошибка при отправке');
+      }
+    } catch (err) {
+      setError('Ошибка сети. Попробуйте позже.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section id="Контакты" className="py-24 bg-zinc-950 relative">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl font-display font-bold mb-6">Готовы к росту?</h2>
+            <p className="text-xl text-white/50 mb-12 leading-relaxed">
+              Оставьте заявку на бесплатную стратегическую сессию, и мы разберем ваш бизнес по косточкам.
+            </p>
+            
+            <div className="space-y-8">
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 rounded-2xl bg-gold/10 flex items-center justify-center shrink-0">
+                  <Globe className="w-6 h-6 text-gold" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-lg mb-1">Работаем по всему миру</h4>
+                  <p className="text-white/40 text-sm">Удаленное сопровождение и выездные сессии</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 rounded-2xl bg-gold/10 flex items-center justify-center shrink-0">
+                  <Shield className="w-6 h-6 text-gold" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-lg mb-1">Конфиденциальность 100%</h4>
+                  <p className="text-white/40 text-sm">Подписываем NDA перед началом любого обсуждения</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-zinc-900 border border-white/10 p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative"
+          >
+            {isSubmitted ? (
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Check className="w-8 h-8 text-green-500" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Заявка принята!</h3>
+                <p className="text-white/50">Мы свяжемся с вами в течение 30 минут.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-xs uppercase tracking-widest text-white/40 mb-2 ml-1">Ваше имя</label>
+                  <input 
+                    type="text" 
+                    required
+                    value={formState.name}
+                    onChange={e => setFormState({...formState, name: e.target.value})}
+                    placeholder="Иван Иванов"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-gold/50 focus:bg-white/10 transition-all outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-widest text-white/40 mb-2 ml-1">Телефон</label>
+                  <input 
+                    type="tel" 
+                    required
+                    value={formState.phone}
+                    onChange={e => setFormState({...formState, phone: e.target.value})}
+                    placeholder="+7 (999) 000-00-00"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-gold/50 focus:bg-white/10 transition-all outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-widest text-white/40 mb-2 ml-1">Комментарий</label>
+                  <textarea 
+                    rows={4}
+                    value={formState.comment}
+                    onChange={e => setFormState({...formState, comment: e.target.value})}
+                    placeholder="Расскажите кратко о вашем проекте..."
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-gold/50 focus:bg-white/10 transition-all outline-none resize-none"
+                  />
+                </div>
+                {error && (
+                  <p className="text-red-500 text-xs text-center mb-4">{error}</p>
+                )}
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-5 bg-gold text-black font-bold rounded-2xl hover:shadow-[0_0_30px_rgba(255,215,0,0.3)] transition-all flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+                  {!isSubmitting && <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
+                </button>
+                <p className="text-[10px] text-center text-white/20">
+                  Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
+                </p>
+              </form>
+            )}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Home = () => {
+  const [quizAnswers, setQuizAnswers] = useState<string[]>([]);
+
   return (
     <div className="font-sans selection:bg-gold selection:text-black">
       <main>
@@ -391,6 +717,8 @@ const Home = () => {
         <Process />
         <Advantages />
         <Trust />
+        <Quiz onFinish={setQuizAnswers} />
+        <Contact quizAnswers={quizAnswers} />
       </main>
     </div>
   );
