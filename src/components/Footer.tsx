@@ -9,8 +9,8 @@ const Footer = () => {
           <span className="font-display font-bold text-xl tracking-tighter">iMperius</span>
         </div>
 
-        <div className="flex gap-8 text-xs uppercase tracking-widest text-white/40">
-          <a href="tel:+79667003303" className="hover:text-gold transition-colors">+7 (966) 700-33-03</a>
+        <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-xs uppercase tracking-widest text-white/40">
+          <a href="tel:+79667003303" className="hover:text-gold transition-colors text-white/80">+7 (966) 700-33-03</a>
           <a href="#" className="hover:text-gold transition-colors">Telegram</a>
           <a href="#" className="hover:text-gold transition-colors">WhatsApp</a>
           <a href="#" className="hover:text-gold transition-colors">Email</a>

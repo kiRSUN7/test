@@ -61,10 +61,15 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Toggle */}
-        <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X /> : <Menu />}
-        </button>
+        {/* Mobile Phone & Toggle */}
+        <div className="flex items-center gap-4 md:hidden">
+          <a href="tel:+79667003303" className="text-xs font-bold text-gold">
+            +7 (966) 700-33-03
+          </a>
+          <button className="text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            {isMobileMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -74,6 +79,9 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           className="md:hidden absolute top-full left-0 w-full bg-black border-b border-white/10 p-6 flex flex-col gap-4"
         >
+          <a href="tel:+79667003303" className="text-xl font-bold text-gold mb-2">
+            +7 (966) 700-33-03
+          </a>
           {displayItems.map((item) => (
             item.path.startsWith("/#") ? (
               <a key={item.name} href={item.path.substring(1)} className="text-lg font-medium text-white/70" onClick={() => setIsMobileMenuOpen(false)}>

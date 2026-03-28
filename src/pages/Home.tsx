@@ -29,7 +29,7 @@ const Hero = () => {
       badge: "Global Scaling Expert",
       title: "iMperius: Масштабирование бизнеса через франчайзинг",
       desc: "12 лет опыта упаковки и масштабирования. Работа напрямую с основателем и командой узких специалистов без лишних посредников.",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
+      image: "/hero-image.jpg.png",
       cta: "Получить аудит",
       secondaryCta: "О компании",
       path: "/#Контакты"
@@ -114,38 +114,7 @@ const Hero = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                 
-                {/* Floating Badges */}
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="absolute top-10 -left-6 p-4 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-20"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center border border-gold/30">
-                      <Award className="w-5 h-5 text-gold" />
-                    </div>
-                    <div>
-                      <div className="text-[10px] uppercase tracking-widest text-white/40 font-semibold">Expert Status</div>
-                      <div className="text-sm font-bold text-white">Verified Partner</div>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7 }}
-                  className="absolute bottom-10 right-6 p-5 bg-gold backdrop-blur-xl rounded-2xl shadow-2xl z-20"
-                >
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-6 h-6 text-black" />
-                    <div>
-                      <div className="text-[10px] uppercase tracking-widest text-black/60 font-bold">Success Rate</div>
-                      <div className="text-lg font-display font-black text-black">98% ROI</div>
-                    </div>
-                  </div>
-                </motion.div>
+                {/* Floating Badges removed as per user request */}
 
                 {/* Bottom Info Overlay */}
                 <div className="absolute bottom-0 left-0 w-full p-8 pt-20 bg-gradient-to-t from-black to-transparent">
@@ -222,9 +191,9 @@ const About = () => {
           >
             <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 bg-black group">
               <img 
-                src="https://picsum.photos/seed/business/800/450" 
+                src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=800" 
                 alt="Expertise" 
-                className="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
@@ -244,7 +213,7 @@ const Pricing = () => {
   const packages = [
     {
       title: "Готовый бизнес (идея, инструкция)",
-      price: "150 000 ₽",
+      price: "89 000 ₽",
       desc: "Полный комплект для запуска вашего бизнеса с нуля.",
       features: [
         "Разработка концепции",
